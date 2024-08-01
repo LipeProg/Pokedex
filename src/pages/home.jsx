@@ -18,7 +18,7 @@ export const Homepage = () => {
 
     const getPokemons = () => {
         var endpoints = []
-        for(var i = 1; i < 800; i++){
+        for(var i = 1; i < 151; i++){
             endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}/`)
         }
 
@@ -26,18 +26,38 @@ export const Homepage = () => {
             axios.get(endpoint)))
             .then((res) => setPokemons(res));
 
+            return response
+
+    };
+
+
+    const filtroPokemons = (name) => {
+        var pokemonsfiltrados = []
+        if(name ===""){
+            getPokemons()
+        }
+
+        for(var i in Pokemons){
+            if(Pokemons[i].data.name.includes(name)){
+                pokemonsfiltrados.push(Pokemons[i])
+            };
+        }
+
+        setPokemons(pokemonsfiltrados);
     };
 
   return (
     <>
-        <NavBar/>
+        <NavBar filtroPokemons = {filtroPokemons}/>
         <Container maxWidth="false" >
             <Grid container spacing={2} >
                 {Pokemons.map((pokemon, key) => (
                     <Grid item xs= {2} key= {key}>
                         <PokemonCard 
                         name={pokemon.data.name}
-                        image={pokemon.data.sprites.front_default}/>
+                        image={pokemon.data.sprites.front_default}
+                        types={pokemon.data.types}/>
+                        
                     </Grid>
                 ))}
 

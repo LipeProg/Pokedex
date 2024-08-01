@@ -2,16 +2,23 @@
 
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 
 /*essa é a função do card, onde tem como um parametro name e image.
   a qual esses parametros são vindo da api chamada na pagina a qual o componente esta sendo chamada*/
-export default function PokemonCard({name, image}) {
+export default function PokemonCard({name, image, types}) {
+
+  const typosPokemon = () => {
+    if(types[1]){
+      return types[0].type.name + " " + types[1].type.name
+    }
+
+    return types[0].type.name;
+  }
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -23,6 +30,9 @@ export default function PokemonCard({name, image}) {
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {name}
+        </Typography>
+        <Typography gutterBottom variant="h5" component="div">
+          {typosPokemon()}
         </Typography>
         
       </CardContent>
