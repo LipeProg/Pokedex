@@ -50,6 +50,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+/* aqui vamos usar a props indicado no componente pai(home.jsx)
+    vamos passa-la como props na função que vamos exportar, e poderemos usa-la dentro dessa função */
 export default function NavBar({filtroPokemons}) {
   return (
     <Box sx={{ flexGrow: 1, marginBottom:"2em" }}>
@@ -63,14 +65,18 @@ export default function NavBar({filtroPokemons}) {
           >
             Pokemons
           </Typography>
+          
           <Search onChange={(e) => filtroPokemons(e.target.value) }>
+            
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
+            
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
             />
+          
           </Search>
         </Toolbar>
       </AppBar>
